@@ -49,7 +49,7 @@ function divandumonde {
 }
 
 function crawl {
-  URL=$*
+  URL=$1
   DOMAIN=`url_to_domain $URL`
   echo $DOMAIN
   curl -s $URL > $CACHE_DIR/$DOMAIN
@@ -82,20 +82,20 @@ function check_cache {
 # MAIN
 
 function proceed {
-  SITE=$1
-  FILE=$CACHE_DIR/$SITE
+  DOMAIN=$1
+  FILE=$CACHE_DIR/$DOMAIN
 
   if [ ! -f $FILE ]; then
-    echo "$SITE cache missing."
+    echo "$DOMAIN cache missing."
     update_cache
   fi
 
-  echo $SITE
-  echo `$SITE $CACHE_DIR/$SITE`
+  echo $DOMAIN
+  echo `$DOMAIN $CACHE_DIR/$DOMAIN`
 }
 
 check_cache
 
-for site in ${URLS[@]}; do
-  proceed `url_to_domain $site`
+for url in ${URLS[@]}; do
+  proceed `url_to_domain $url`
 done
