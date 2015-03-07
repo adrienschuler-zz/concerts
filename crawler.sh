@@ -8,6 +8,7 @@ URLS=(
   www.flechedor.fr/Agenda/
   www.divandumonde.com/
   #www.radiometal.com/plateforme/agenda-concerts
+  #http://www.fnacspectacles.com/recherche/recherche.do
 )
 
 # UTILS
@@ -17,7 +18,7 @@ function strip_html_tags {
 }
 
 function strip_empty_newlines {
-  sed -e '/^\s*$/d' $*
+  sed -E '/^\s*$/d' $*
 }
 
 function url_to_domain {
@@ -27,8 +28,7 @@ function url_to_domain {
 # CRAWLING
 
 function pointephemere {
-  AGENDA=`cat $1 | grep -A3 -Ei 'sommaire\">(.*)'`
-  echo $AGENDA | strip_html_tags
+  cat $1 | grep -A3 -Ei 'sommaire\">(.*)' | strip_html_tags
 }
 
 function linternational {
