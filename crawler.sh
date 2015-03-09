@@ -1,58 +1,84 @@
 #!/bin/bash
 
 CACHE_DIR='./cache'
+UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'
 URLS=(
   www.pointephemere.org/category/concert/
   www.linternational.fr/agenda/
   www.lamaroquinerie.fr/Agenda/
   www.flechedor.fr/Agenda/
   www.divandumonde.com/
-  #www.radiometal.com/plateforme/agenda-concerts
-  #http://www.fnacspectacles.com/recherche/recherche.do
+  www.letrianon.fr/programme.html
+  www.le-zenith.com/pages/programmation/programmation-par-date.html
+  www.bataclan.fr/agenda.php
+  www.letrabendo.net/programmation/
+  # www.labellevilloise.com/category/evenements/?ec3_after=today
+  # www.radiometal.com/plateforme/agenda-concerts
+  # http://www.fnacspectacles.com/recherche/recherche.do
 )
 
 # UTILS
 
 function strip_html_tags {
-  sed -E 's/<[^>]*>//g' $*
+  LC_ALL=C sed -E 's/<[^>]*>//g' $*
 }
 
 function strip_empty_newlines {
-  sed -E '/^\s*$/d' $*
+  LC_ALL=C sed -E '/^\s*$/d' $*
 }
 
 function url_to_domain {
-  echo $* | cut -d'.' -f2
+  echo $1 | cut -d'.' -f2
 }
 
 # CRAWLING
 
 function pointephemere {
-  cat $1 | grep -A3 -Ei 'sommaire\">(.*)' | strip_html_tags
+  grep -A3 -Ei 'sommaire\">(.*)' $1
 }
 
 function linternational {
-  # cat $1 | grep -A3 -Ei 'ev2shr-data'  | strip_html_tags | strip_empty_newlines
-  cat $1 | grep -A3 -Ei 'ev2shr-title' | strip_html_tags | strip_empty_newlines
+  # grep -E -A3 'ev2shr-data' $1
+  grep -E -A3 'ev2shr-title' $1
 }
 
 function lamaroquinerie {
-  cat $1 | grep -A1 -Ei 'vignetteTitre' | strip_html_tags
+  grep -E -A1 'vignetteTitre' $1
 }
 
 function flechedor {
-  cat $1 | grep -A1 -Ei 'textProchainement' | strip_html_tags
+  grep -E -A1 'textProchainement' $1
 }
 
 function divandumonde {
-  cat $1 | grep -A15 -Ei 'withdate' | strip_html_tags
+  grep -E -A15 'withdate' $1
+}
+
+function letrianon {
+  grep -E -A10 'pogrammation1' $1
+}
+
+function le-zenith {
+  grep -E -A3 'prog_colonne_infos' $1
+}
+
+function bataclan {
+  grep -E -A8 'liste' $1
+}
+
+function letrabendo {
+  grep -E -A5 'concert' $1
+}
+
+function labellevilloise {
+  grep -E -A5 'entry-utility' $1
 }
 
 function crawl {
   URL=$1
   DOMAIN=`url_to_domain $URL`
   echo $DOMAIN
-  curl -s $URL > $CACHE_DIR/$DOMAIN
+  curl -s -A $UA $URL > $CACHE_DIR/$DOMAIN
 }
 
 # CACHING
@@ -91,7 +117,7 @@ function proceed {
   fi
 
   echo $DOMAIN
-  echo `$DOMAIN $CACHE_DIR/$DOMAIN`
+  echo `$DOMAIN $CACHE_DIR/$DOMAIN | strip_html_tags | strip_empty_newlines`
 }
 
 check_cache
