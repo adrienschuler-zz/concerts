@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source lib/utils.sh
-
 function pointephemere {
     grep -E -A3 'sommaire' $1
 }
