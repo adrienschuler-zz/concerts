@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# ACCESS_TOKEN="frIBcqPEa2uObMfRSKrOrB4MDRszOLygr1YwK2Hfq6aT8y7895q"
-# curl -s -XGET "http://api.deezer.com/user/me/artists?access_token=$ACCESS_TOKEN&limit=100" | python -mjson.tool
-
 curl -s -XGET "http://localhost:9200/_search?pretty" -d'
 {
   "size": 200,
