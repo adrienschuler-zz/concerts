@@ -2,7 +2,6 @@
 
 source conf/conf.sh
 source lib/utils.sh
-source lib/parsing.sh
 
 function proceed {
     DOMAIN=$1
