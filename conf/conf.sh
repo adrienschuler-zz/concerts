@@ -5,16 +5,33 @@ UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, l
 CACHE_EXPIRE='1d'
 
 URLS=(
-  www.pointephemere.org/agenda-global
-  www.linternational.fr/agenda/
-  www.lamaroquinerie.fr/Agenda/
-  www.flechedor.fr/Agenda/
-  www.divandumonde.com/
-  www.letrianon.fr/programme.html
-  www.le-zenith.com/pages/programmation/programmation-par-date.html
-  www.bataclan.fr/agenda.php
-  www.letrabendo.net/programmation/
-  www.labellevilloise.com/category/evenements/?ec3_after=today
-  # www.radiometal.com/plateforme/agenda-concerts
-  # www.fnacspectacles.com/recherche/recherche.do
+  # http://www.bataclan.fr/agenda.php
+  # http://www.divandumonde.com/
+  # http://espaceb.net/-Agenda-
+  # http://www.labellevilloise.com/agenda/
+  # http://www.lamaroquinerie.fr/Agenda/
+  # http://www.le-zenith.com/pages/programmation/programmation-par-date.html
+  # http://www.letrabendo.net/programmation/
+  # http://www.letrianon.fr/programme
+  # http://www.linternational.fr/agenda/
+  # http://www.flechedor.fr/Agenda/
+  # http://www.pointephemere.org/agenda-global
+
+  # http://www.newmorning.com/programmation
+  # http://www.laboule-noire.fr/programmation/
+  # http://badaboum.paris/programmation
+  # http://www.lacigale.fr/en/programmation/
+  # http://espaceb.net/
+  # http://yoyo-paris.com/agenda/
+  # http://www.glazart.com/agenda/
+  # http://www.rexclub.com/
+  # http://www.concreteparis.fr/Booking-en.html
+  # http://www.lamachinedumoulinrouge.com/en/agenda
+  # http://www.parissocialclub.com/tickets/
+  # http://mecanique-ondulatoire.com/
+
+  # http://www.radiometal.com/plateforme/agenda-concerts
+  # http://www.fnacspectacles.com/recherche/recherche.do
+  # http://www.songkick.com/
+  # http://www.bandsintown.com/
 )

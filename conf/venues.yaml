@@ -1,0 +1,84 @@
+# TODO: xpath
+
+venues:
+    # -
+    #     url: http://www.divandumonde.com/
+    #     name: divandumonde
+    #     bloc: td.class.withdate
+    #     artist: div.class.title
+    #     date: div.class.date
+    #     date_pattern: ([0-9]{2})(\w+)
+    # -
+    #     url: http://espaceb.net/-Agenda-
+    #     name: espaceb
+    #     bloc: h3
+    #     artist: div.class.texte
+    #     date: h3
+    #     date_pattern: ''
+    -
+        url: http://www.labellevilloise.com/agenda/
+        name: labellevilloise
+        bloc: div.class.et_pb_portfolio_item
+        artist: h2
+        date: p.class.post-meta
+        code: |
+            import re
+            def date_format(date):
+                months = ['janvier', u'f\xe9vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', u'ao\xfbt', 'septembre', 'octobre', 'novembre', u'd\xe9cembre']
+                match = re.search(' ([0-9]{1,2}) (\w+)', date, re.UNICODE)
+                return '2016%s%s0000' % (str(months.index(match.group(2)) + 1).zfill(2), match.group(1).zfill(2))
+    -
+        url: http://www.lamaroquinerie.fr/Agenda/
+        name: lamaroquinerie
+        bloc: table.class.vignetteEvent
+        artist: td.class.vignetteTitre
+        date: td.class.vignetteDate
+        code: |
+            import re
+            def date_format(date):
+                m = re.findall('[0-9]{1,2}', date, re.UNICODE)
+                return '20%s%s%s%s%s' % (m[2], m[1], m[0], m[3], m[4])
+    -
+        url: http://www.le-zenith.com/pages/programmation/programmation-par-date.html
+        name: le-zenith
+        bloc: div.class.bloc_prog
+        artist: h4.class.prog_artiste
+        date: p.class.prog_date
+        code: |
+            import re
+            def date_format(date):
+                months = ['janvier', u'f\xe9vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', u'ao\xfbt', 'septembre', 'octobre', 'novembre', u'd\xe9cembre']
+                match = re.search(' ([0-9]{1,2}) (\w+) ([0-9]{4})', date, re.UNICODE)
+                g1, g2, g3 = match.groups()
+                return '%s%s%s0000' % (g3, str(months.index(g2) + 1).zfill(2), g1.zfill(2))
+    # -
+    #     url: http://www.letrabendo.net/programmation/
+    #     name: letrabendo
+    #     bloc: article.class.post-grid
+    #     artist: div.class.post-grid-infos-content h4
+    #     date: h4.class.post-grid-date
+    #     code: |
+    #         import re
+    #         def date_format(date):
+    #             # todo: handle years
+    #             months = ['janvier', u'f\xe9vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', u'ao\xfbt', 'septembre', 'octobre', 'novembre', u'd\xe9cembre']
+    #             match = re.search('([0-9]{1,2})[ER]{0,2} (\w+)', date, re.UNICODE)
+    #             return '2016%s%s0000' % (str(months.index(match.group(2)) + 1).zfill(2), match.group(1).zfill(2))
+    # -
+    #     url: http://www.letrianon.fr/programme
+    #     name: letrianon
+    #     bloc: div.class.box3-home
+    #     artist: div.class.boxneventtitle
+    #     date: div.class.boxneventdate
+    # -
+    #     url: http://www.linternational.fr/agenda
+    #     name: linternational
+    #     bloc: div.class.ev2shr-col
+    #     artist: h2.class.ev2shr-title
+    #     date: div.class.ev2shr-data
+    # -
+    #     url: http://www.flechedor.fr/Agenda/
+    #     name: flechedor
+    #     bloc: table.class.color*
+    #     artist: h2.class.vignetteTitre
+    #     date: div.class.vignetteDate

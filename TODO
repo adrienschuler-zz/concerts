@@ -1,0 +1,19 @@
+- seedlist
+- deep crawl / html cache
+- per site parsing rules
+- cleaning / tokenizing / indexing
+- static assets
+    - thumbs
+        - artist/venue/you/genre
+- metadata enrichment
+    - deezer/spoti/fb/youtube/discogs apis
+    - import & index likes/artists/tracks/geo
+- search
+    - filters
+        - geo radius
+        - venues
+        - genres
+        - my likes
+- recommendations
+- ticket disponibility
+    - fnac/digitick/ticketswap/venue...
