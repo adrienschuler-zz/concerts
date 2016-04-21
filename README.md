@@ -2,7 +2,7 @@
 
 Crawl seedlist and update local html cache:
 ```shell
-./crawler.sh
+./bin/crawler.sh
 ```
 
 Create local ES indices:
@@ -12,10 +12,10 @@ Create local ES indices:
 
 Parse and index events:
 ```shell
-python parser.py | python indexer.py
+./bin/parser.py | ./bin/indexer.py
 ```
 
 Match indexed events with Deezer/Spotify API:
 ```shell
-./get-artists.sh
+./bin/get-artists.sh
 ```
