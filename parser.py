@@ -56,15 +56,14 @@ with open('conf/venues.yaml', 'r') as stream:
                                 "venue": sanitize(venue['name']),
                                 "date": sanitize(date)
                             }
-                            print json.dumps(doc)
                     else:
                         doc = {
                             "artist": sanitize(artist),
                             "venue": sanitize(venue['name']),
                             "date": sanitize(date)
                         }
-                        # print '%s\t%s - %s' % (venue['name'], artist, date)
-                        print json.dumps(doc)
+
+                    print json.dumps(doc)
 
     except yaml.YAMLError as e:
-        print(e)
+        print e

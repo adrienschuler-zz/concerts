@@ -1,6 +1,5 @@
 import fileinput
 import hashlib
-from datetime import datetime
 
 from elasticsearch import Elasticsearch
 
