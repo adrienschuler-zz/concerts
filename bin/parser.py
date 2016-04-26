@@ -38,34 +38,26 @@ with open('conf/venues.yaml', 'r') as stream:
     try:
         conf = yaml.load(stream)
         for venue in conf['venues']:
+            selectors = venue['selectors']
             page = open('cache/%s' % venue['name'], 'r')
             soup = BeautifulSoup(page, 'html.parser')
-            concerts = get_entities(venue['bloc'])
+            concerts = get_entities(selectors['bloc'])
 
             for concert in concerts:
                 func = {}
-                artist = find(concert, venue['artist'])
                 exec(venue['code'], func)
-                date = func['date_format'](find(concert, venue['date']))
+                date = func['date_format'](find(concert, selectors['date']))
+                artist = find(concert, selectors['artist'])
 
                 if artist:
-                    if '+' in artist:
-                        artists = artist.split('+')
-
-                        for artist in artists:
-                            doc = {
-                                "artist": sanitize(artist),
-                                "venue": sanitize(venue['name']),
-                                "date": sanitize(date)
-                            }
-                    else:
-                        doc = {
-                            "artist": sanitize(artist),
-                            "venue": sanitize(venue['name']),
-                            "date": sanitize(date)
-                        }
+                    doc = {
+                        'name': sanitize(artist),
+                        'artists': sanitize(artist),
+                        'venue': sanitize(venue['name']),
+                        'date': int(sanitize(date)),
+                        'location': venue['coordinates']
+                    }
 
                     print json.dumps(doc)
-
     except yaml.YAMLError as e:
         print e

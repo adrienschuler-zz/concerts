@@ -18,9 +18,13 @@ venues:
     -
         url: http://www.labellevilloise.com/agenda/
         name: labellevilloise
-        bloc: div.class.et_pb_portfolio_item
-        artist: h2
-        date: p.class.post-meta
+        coordinates:
+            lat: 48.8684253
+            lon: 2.3899103
+        selectors:
+            bloc: div.class.et_pb_portfolio_item
+            artist: h2
+            date: p.class.post-meta
         code: |
             import re
             def date_format(date):
@@ -31,9 +35,13 @@ venues:
     -
         url: http://www.lamaroquinerie.fr/Agenda/
         name: lamaroquinerie
-        bloc: table.class.vignetteEvent
-        artist: td.class.vignetteTitre
-        date: td.class.vignetteDate
+        coordinates:
+            lat: 48.8685303
+            lon: 2.3898483
+        selectors:
+            bloc: table.class.vignetteEvent
+            artist: td.class.vignetteTitre
+            date: td.class.vignetteDate
         code: |
             import re
             def date_format(date):
@@ -43,9 +51,13 @@ venues:
     -
         url: http://www.le-zenith.com/pages/programmation/programmation-par-date.html
         name: le-zenith
-        bloc: div.class.bloc_prog
-        artist: h4.class.prog_artiste
-        date: p.class.prog_date
+        coordinates:
+            lat: 48.8942205
+            lon: 2.3910283
+        selectors:
+            bloc: div.class.bloc_prog
+            artist: h4.class.prog_artiste
+            date: p.class.prog_date
         code: |
             import re
             def date_format(date):

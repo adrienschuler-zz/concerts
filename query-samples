@@ -1,0 +1,21 @@
+curl -s -XGET "localhost:9200/concerts/concert/_search?pretty" -d '
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      },
+      "filter": {
+        "geo_distance": {
+          "distance": "6.2km",
+          "location": {
+            "lat": 48.8855597,
+            "lon": 2.3071981
+          }
+        }
+      }
+    }
+  }
+}'
+
+curl -s -XGET "localhost:9200/concerts/_analyze?analyzer=artists_analyzer&pretty" -d 'HRZNS #4 : GRACY HOPKINS + DIE-MEH & SLIMK + KORIASS'

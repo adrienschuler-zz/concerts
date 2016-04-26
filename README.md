@@ -15,7 +15,7 @@ Parse and index events:
 ./bin/parser.py | ./bin/indexer.py
 ```
 
-Match indexed events with Deezer/Spotify API:
+Match indexed events with Deezer/Spotify Artists API:
 ```shell
 ./bin/get-artists.sh
 ```
