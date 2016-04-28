@@ -15,26 +15,20 @@ curl -s -XPUT "$HOST/$INDEX" -d '
             "number_of_replicas": 0
         },
         "analysis": {
-            "filter": {
-                "artists_filter": {
-                    "type": "pattern_capture",
+            "tokenizer": {
+                "pattern_tokenizer": {
+                    "type": "pattern",
                     "preserve_original": false,
-                    "flags": "CASE_INSENSITIVE",
-                    "patterns": [
-                        "([a-z \\-]+[ \\+]?)"
-                    ]
-                },
-                "artists_stopwords": {
-                    "type": "stop",
-                    "stopwords": ["+", "&"]
+                    "flags": "CASE_INSENSITIVE|UNICODE_CASE",
+                    "pattern": "[\\+:&]+"
                 }
             },
             "analyzer": {
                 "artists_analyzer": {
                     "type": "custom",
-                    "tokenizer": "pattern",
+                    "tokenizer": "pattern_tokenizer",
                     "filter": [
-                        "artists_filter"
+                        "trim"
                     ]
                 }
             }
