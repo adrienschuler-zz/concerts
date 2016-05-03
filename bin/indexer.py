@@ -13,7 +13,7 @@ for doc in fileinput.input():
     key = hashlib.md5(doc).hexdigest()
     print key, doc
     try:
-        response = es.index(index='concerts', doc_type='concert', body=doc, id=key)
+        response = es.index(index='events', doc_type='event', body=doc, id=key)
         print response
     except Exception as e:
         print e

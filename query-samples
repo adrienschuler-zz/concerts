@@ -1,4 +1,4 @@
-curl -s -XGET "localhost:9200/concerts/concert/_search?pretty" -d '
+curl -s -XGET 'localhost:9200/events/event/_search?pretty' -d '
 {
   "query": {
     "bool": {
@@ -18,4 +18,13 @@ curl -s -XGET "localhost:9200/concerts/concert/_search?pretty" -d '
   }
 }'
 
-curl -s -XGET "localhost:9200/concerts/_analyze?analyzer=artists_analyzer&pretty" -d 'HRZNS #4 : GRACY HOPKINS + DIE-MEH & SLIMK + KORIASS'
+curl -s -XGET 'localhost:9200/events/_analyze?analyzer=artists_analyzer&pretty' -d 'HRZNS #4 : GRACY HOPKINS + DIE-MEH & SLIMK + KORIASS'
+
+curl -s -XPOST 'localhost:9200/events/_suggest?pretty' -d '{
+  "artists_suggest" : {
+    "text" : "radio",
+    "completion" : {
+      "field" : "event_suggest"
+    }
+  }
+}'

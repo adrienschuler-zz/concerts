@@ -2,8 +2,8 @@
 
 HOST='localhost:9200'
 
-INDEX='concerts'
-TYPE='concert'
+INDEX='events'
+TYPE='event'
 
 curl -s -XDELETE "$HOST/$INDEX"
 curl -s -XPUT "$HOST/$INDEX" -d '
@@ -43,11 +43,20 @@ curl -s -XPUT "$HOST/$INDEX" -d '
                 "name": {
                     "type": "string"
                 },
+                "event_suggest": {
+                    "type": "completion",
+                    "analyzer": "simple",
+                    "search_analyzer": "simple",
+                    "payloads": true
+                },
                 "artists": {
                     "type": "string",
                     "analyzer": "artists_analyzer"
                 },
                 "link": {
+                    "type": "string"
+                },
+                "thumbnail": {
                     "type": "string"
                 },
                 "date": {
@@ -56,61 +65,6 @@ curl -s -XPUT "$HOST/$INDEX" -d '
                 },
                 "location": {
                     "type": "geo_point"
-                }
-            }
-        }
-    }
-}'
-
-INDEX='venues'
-TYPE='venue'
-
-curl -s -XDELETE "$HOST/$INDEX"
-curl -s -XPUT "$HOST/$INDEX" -d '
-{
-    "settings": {
-        "index": {
-            "dynamic": "strict",
-            "number_of_shards": 1,
-            "number_of_replicas": 0
-        }
-    },
-    "mappings": {
-        '"$TYPE"': {
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "artist": {
-                    "type": "string"
-                },
-                "date": {
-                    "type": "date",
-                    "format": "strict_date_hour_minute"
-                }
-            }
-        }
-    }
-}'
-
-INDEX='artists'
-TYPE='artist'
-
-curl -s -XDELETE "$HOST/$INDEX"
-curl -s -XPUT "$HOST/$INDEX" -d '
-{
-    "settings": {
-        "index": {
-            "dynamic": "strict",
-            "number_of_shards": 1,
-            "number_of_replicas": 0
-        }
-    },
-    "mappings": {
-        '"$TYPE"': {
-            "properties": {
-                "name": {
-                    "type": "string"
                 }
             }
         }

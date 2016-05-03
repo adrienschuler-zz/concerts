@@ -41,17 +41,18 @@ with open('conf/venues.yaml', 'r') as stream:
             selectors = venue['selectors']
             page = open('cache/%s' % venue['name'], 'r')
             soup = BeautifulSoup(page, 'html.parser')
-            concerts = get_entities(selectors['bloc'])
+            events = get_entities(selectors['bloc'])
 
-            for concert in concerts:
+            for event in events:
                 func = {}
                 exec(venue['code'], func)
-                date = func['date_format'](find(concert, selectors['date']))
-                artist = find(concert, selectors['artist'])
+                date = func['date_format'](find(event, selectors['date']))
+                artist = find(event, selectors['artist'])
 
                 if artist:
                     doc = {
                         'name': sanitize(artist),
+                        'event_suggest': sanitize(artist),
                         'artists': sanitize(artist),
                         'venue': sanitize(venue['name']),
                         'date': int(sanitize(date)),
